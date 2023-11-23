@@ -22,6 +22,7 @@ class WebhookController extends Controller
                 Log::info('Webhook Verified');
                 return response($challenge, 200);
             } else {
+                Log::info('Verification Failed');
                 return response(null, 403);
             }
         }
