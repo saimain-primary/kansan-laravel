@@ -56,7 +56,7 @@ trait MessengerTrait
         return $responseData;
     }
 
-    protected function sendText($senderPSID, $text, $messageType = 'RESPONSE')
+    protected function sendText($senderPSID, $text, $messageType = null)
     {
         try {
             $response = Http::post($this->apiURL, [

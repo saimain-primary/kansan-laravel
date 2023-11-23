@@ -57,9 +57,11 @@ class WebhookController extends Controller
     {
         Log::debug($event);
         $senderPSID = $event['sender']['id'];
-        // $this->sendSenderAction($senderPSID, 'typing_on');
-        // $this->sendSenderAction($senderPSID, 'typing_off');
-        // $this->sendText($senderPSID, 'Hello , This is from handleWebhookEvent');
+        $message = $event['message']['text'];
+        $this->sendSenderAction($senderPSID, 'typing_on');
+        $this->sendText($senderPSID, 'Hello , This is from handleWebhookEvent , Your message is ' . $message);
+        ;
+        $this->sendSenderAction($senderPSID, 'typing_off');
         return response('Successfully handled', 200);
     }
 }
