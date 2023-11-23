@@ -81,13 +81,11 @@ class WebhookController extends Controller
                 'title' => 'ကံစမ်းမဲ ဝယ်ရန်',
                 'subtitle' => 'ကံစမ်းမဲ ဝယ်နည်းများကို အသေးစိတ်ကြည့်မည်',
                 'image_url' => Storage::disk('public')->url('images/buying_ticket_guide.png'),
-                'buttons' => [
-                        [
-                            'type' => 'postback',
-                            'title' => 'View Detail',
-                            'payload' => 'VIEW_BUY_TICKET_GUIDE_DETAIL'
-                        ]
-                    ]
+                "default_action" => [
+                    "type" => "postback",
+                    "title" => "Default Action Title",
+                    "payload" => "DEFAULT_ACTION_PAYLOAD"
+                ]
             ],
             [
                 'title' => 'ကံစမ်းမဲ လက်မှတ် စစ်ရန်',
