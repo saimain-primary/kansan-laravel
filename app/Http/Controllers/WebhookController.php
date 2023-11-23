@@ -33,5 +33,6 @@ class WebhookController extends Controller
     {
         Log::info('post webhook called');
         Log::debug($request->all());
+        return response(null, 200);
     }
 }
