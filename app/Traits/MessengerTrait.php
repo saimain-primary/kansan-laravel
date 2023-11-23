@@ -2,6 +2,7 @@
 
 namespace App\Traits;
 
+use Exception;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Http;
@@ -30,37 +31,24 @@ trait MessengerTrait
     protected function sendTypingAction($senderPSID)
     {
         try {
-            $response = Http::post('http://example.com/users', [
-                'name' => 'Steve',
-                'role' => 'Network Administrator',
-            ]);
-
-            $response = self::$httpClient->request("POST", self::$apiURL, [
-                'json' => [
-                    'recipient' => [
-                        'id' => $senderPSID,
-                    ],
-                    "sender_action" => "typing_on"
-                ]
+            $response = Http::post(self::$apiURL, [
+                'recipient' => [
+                    'id' => $senderPSID,
+                ],
+                "sender_action" => "typing_on"
             ]);
 
             // Decode the JSON response
             $responseData = [
-                'response' => json_decode($response->getBody(), true),
-                'status' => $response->getStatusCode()
+                'response' => $response->json(),
+                'status' => 200
             ];
 
-        } catch (ClientException $e) {
-            // Extract the response from the exception
-            $response = $e->getResponse();
-            $responseBody = $response->getBody()->getContents();
-            // Decode the JSON response
+        } catch (Exception $e) {
             $responseData = [
-                'response' =>  json_decode($responseBody, true),
-                'status' => $response->getStatusCode()
+                'response' =>  $e->getMessage(),
+                'status' => 500,
             ];
-            // Handle the error accordingly
-            // For example, you might log the error or return an error message
         }
 
         // Return the response data or handle it as needed
