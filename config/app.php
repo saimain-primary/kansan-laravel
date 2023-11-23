@@ -20,6 +20,9 @@ return [
 
     'fb_access_token' => env('FB_ACCESS_TOKEN'),
     'fb_verify_token' => env('FB_VERIFY_TOKEN'),
+    'fb_graph_url' => env('FB_GRAPH_URL'),
+    'fb_page_id' => env('FB_PAGE_ID'),
+    'fb_graph_version' => env('FB_GRAPH_VERSION'),
     /*
     |--------------------------------------------------------------------------
     | Application Environment

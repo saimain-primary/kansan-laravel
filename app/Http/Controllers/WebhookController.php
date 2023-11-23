@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use GuzzleHttp\Psr7\MessageTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 class WebhookController extends Controller
 {
+    use MessageTrait;
+
     public function getWebhook(Request $request)
     {
         Log::info('get webhook called');
@@ -48,5 +51,6 @@ class WebhookController extends Controller
     {
         Log::debug($event);
         $senderPSID = $event['sender']['id'];
+        return $this->sendTypingAction($senderPSID);
     }
 }
