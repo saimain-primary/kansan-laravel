@@ -9,6 +9,7 @@ class WebhookController extends Controller
 {
     public function getWebhook(Request $request)
     {
+        Log::info('get webhook called');
         Log::debug($request->all());
 
         $verifyToken = config('app.fb_verify_token');
