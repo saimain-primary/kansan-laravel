@@ -126,7 +126,7 @@ class WebhookController extends Controller
     {
         $contact = Contact::first();
         Log::debug($contact);
-        $message = "🍀 မင်္ဂလာပါ \n\n" . $contact->description . '\n\n' . 'ဖုန်းနံပါတ် : ' . $contact->phone . '\n' . 'အီးမေးလ် : ' . $contact->email . '\n' . 'လိပ်စာ : ' . $contact->address;
+        $message = "🍀 မင်္ဂလာပါ" . PHP_EOL . PHP_EOL . $contact->description . PHP_EOL . PHP_EOL . 'ဖုန်းနံပါတ် : ' . $contact->phone .  PHP_EOL  . 'အီးမေးလ် : ' . $contact->email . PHP_EOL . 'လိပ်စာ : ' . $contact->address;
         $this->sendText($senderPSID, $message);
     }
 }
