@@ -18,6 +18,8 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+    'fb_access_token' => env('FB_ACCESS_TOKEN'),
+    'fb_verify_token' => env('FB_VERIFY_TOKEN'),
     /*
     |--------------------------------------------------------------------------
     | Application Environment
