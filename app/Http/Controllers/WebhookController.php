@@ -106,7 +106,7 @@ class WebhookController extends Controller
             ],
             [
                 'title' => 'ကံစမ်း နှင့် ဆက်သွယ်ရန်',
-                'subtitle' => 'ကံစမ်း Messenger Bot အဖွဲ့ နှင့် တိုက်ရိုက် ဆက်သွယ်ရန်မည်',
+                'subtitle' => 'ကံစမ်း Messenger Bot အဖွဲ့ နှင့် တိုက်ရိုက် ဆက်သွယ်မည်',
                 'image_url' => Storage::disk('public')->url('images/contact_us_guide.png'),
                 'buttons' => [
                     [
@@ -125,7 +125,6 @@ class WebhookController extends Controller
     protected function sendContactUsContent($senderPSID)
     {
         $contact = Contact::first();
-        Log::debug($contact);
         $message = "🍀 မင်္ဂလာပါ" . PHP_EOL . PHP_EOL . $contact->description . PHP_EOL . PHP_EOL . 'ဖုန်းနံပါတ် : ' . $contact->phone .  PHP_EOL  . 'အီးမေးလ် : ' . $contact->email . PHP_EOL . 'လိပ်စာ : ' . $contact->address;
         $this->sendText($senderPSID, $message);
     }
