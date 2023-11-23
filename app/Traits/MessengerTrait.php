@@ -28,14 +28,14 @@ trait MessengerTrait
     }
 
 
-    protected function sendTypingAction($senderPSID)
+    protected function sendSenderAction($senderPSID, $action)
     {
         try {
             $response = Http::post($this->apiURL, [
                 'recipient' => [
                     'id' => $senderPSID,
                 ],
-                "sender_action" => "typing_on"
+                "sender_action" => $action
             ]);
 
             // Decode the JSON response
@@ -52,6 +52,35 @@ trait MessengerTrait
         }
 
         // Return the response data or handle it as needed
+        Log::debug($responseData);
+        return $responseData;
+    }
+
+    protected function sendText($senderPSID, $text, $messageType = 'RESPONSE')
+    {
+        try {
+            $response = Http::post($this->apiURL, [
+                'recipient' => [
+                    'id' => $senderPSID,
+                ],
+                "message_type" => $messageType,
+                "message" => [
+                    'text' => $text
+                ]
+            ]);
+
+            // Decode the JSON response
+            $responseData = [
+                'response' => $response->json(),
+                'status' => 200
+            ];
+
+        } catch (Exception $e) {
+            $responseData = [
+                'response' =>  $e->getMessage(),
+                'status' => 500,
+            ];
+        }
         Log::debug($responseData);
         return $responseData;
     }
