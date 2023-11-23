@@ -60,5 +60,6 @@ class WebhookController extends Controller
         $this->sendSenderAction($senderPSID, 'typing_on');
         $this->sendSenderAction($senderPSID, 'typing_off');
         $this->sendText($senderPSID, 'Hello , This is from handleWebhookEvent');
+        return;
     }
 }
