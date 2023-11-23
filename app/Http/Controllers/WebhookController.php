@@ -58,7 +58,7 @@ class WebhookController extends Controller
     {
         Log::debug($event);
         $senderPSID = $event['sender']['id'];
-        if ($event['postback']) {
+        if (isset($event['postback'])) {
             Log::info('postback is called');
         } else {
             $message = $event['message']['text'];
