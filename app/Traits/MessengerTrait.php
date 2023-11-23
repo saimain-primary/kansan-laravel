@@ -10,28 +10,28 @@ use GuzzleHttp\Exception\ClientException;
 
 trait MessengerTrait
 {
-    protected static $accessToken;
-    protected static $apiURL;
-    protected static $apiVersion;
-    protected static $pageId;
-    protected static $httpClient;
+    protected $accessToken;
+    protected $apiURL;
+    protected $apiVersion;
+    protected $pageId;
+    protected $httpClient;
 
     // Boot method for the trait
-    protected static function bootMessengerTrait()
+    protected function bootMessengerTrait()
     {
         // Retrieve the value from .env, or use a default value
-        static::$accessToken = config('app.fb_access_token');
-        static::$apiVersion = config('app.fb_api_version');
-        static::$pageId = config('app.fb_page_id');
-        static::$apiURL = "https://graph.facebook.com/" . static::$apiVersion . "/" . static::$pageId . "/messages?access_token=" . static::$accessToken;
-        static::$httpClient = new Client();
+        $this->accessToken = config('app.fb_access_token');
+        $this->apiVersion = config('app.fb_api_version');
+        $this->pageId = config('app.fb_page_id');
+        $this->apiURL = "https://graph.facebook.com/" . $this->apiVersion . "/" . $this->pageId . "/messages?access_token=" . $this->accessToken;
+        $this->httpClient = new Client();
     }
 
 
     protected function sendTypingAction($senderPSID)
     {
         try {
-            $response = Http::post(self::$apiURL, [
+            $response = Http::post($this->apiURL, [
                 'recipient' => [
                     'id' => $senderPSID,
                 ],

@@ -10,7 +10,12 @@ class WebhookController extends Controller
 {
     use MessengerTrait;
 
-   
+    public function __construct()
+    {
+        $this->bootMessengerTrait();
+    }
+
+
     public function getWebhook(Request $request)
     {
         Log::info('get webhook called');
