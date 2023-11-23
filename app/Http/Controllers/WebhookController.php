@@ -83,7 +83,6 @@ class WebhookController extends Controller
                 'image_url' => Storage::disk('public')->url('images/buying_ticket_guide.png'),
                 "default_action" => [
                     "type" => "postback",
-                    "title" => "Default Action Title",
                     "payload" => "DEFAULT_ACTION_PAYLOAD"
                 ]
             ],
