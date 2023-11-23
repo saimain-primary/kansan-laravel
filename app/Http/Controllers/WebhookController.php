@@ -32,7 +32,21 @@ class WebhookController extends Controller
     public function postWebhook(Request $request)
     {
         Log::info('post webhook called');
-        Log::debug($request->all());
-        return response(null, 200);
+        $data = $request->all();
+        if ($data['object'] === "page") {
+            foreach ($data['entry'] as $ent) {
+                $webhookEvent = $ent['messaging'][0];
+                $this->handleWebhookEvent($webhookEvent);
+            }
+            return response('Event Received', 200);
+        } else {
+            return response(null, 403);
+        }
+    }
+
+    protected function handleWebhookEvent($event)
+    {
+        Log::debug($event);
+        $senderPSID = $event['sender']['id'];
     }
 }
