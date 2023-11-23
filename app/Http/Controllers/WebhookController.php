@@ -13,21 +13,16 @@ class WebhookController extends Controller
 
         $verifyToken = config('app.fb_verify_token');
 
+        $challenge = $request->hub_challenge;
         $mode = $request->hub_mode;
         $vToken = $request->hub_verify_token;
 
         if ($mode && $vToken) {
             if ($mode === "subscribe" && $vToken === $verifyToken) {
                 Log::info('Webhook Verified');
-                return response()->json([
-                    'success' => true,
-                    'message' => 'Successfully verified'
-                ], 200);
+                return response($challenge, 200);
             } else {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Verification Failed'
-                ], 500);
+                return response(null, 403);
             }
         }
     }
