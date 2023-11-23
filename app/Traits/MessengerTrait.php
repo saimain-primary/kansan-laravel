@@ -96,6 +96,7 @@ trait MessengerTrait
                     'attachment' => [
                         'type' => 'template',
                         'payload' => [
+                            'image_aspect_ratio' => 'square',
                             'template_type' => 'generic',
                             'elements' => $content
                         ]
