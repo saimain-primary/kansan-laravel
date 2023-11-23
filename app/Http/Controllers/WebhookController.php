@@ -79,7 +79,7 @@ class WebhookController extends Controller
         $content = [
             [
                 'title' => 'ကံစမ်းမဲ ဝယ်ရန်',
-                'subtitle' => 'ကံစမ်းမဲ ဝယ်နည်းများကို အသေးစိတ်ကြည့်ရန်အတွက် အောက်ရှိ View Detail ကို နှိပ်ပါ။',
+                'subtitle' => 'ကံစမ်းမဲ ဝယ်နည်းများကို အသေးစိတ်ကြည့်မည်',
                 'image_url' => Storage::disk('public')->url('images/buying_ticket_guide.png'),
                 'buttons' => [
                         [
