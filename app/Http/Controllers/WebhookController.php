@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use GuzzleHttp\Psr7\MessageTrait;
+use App\Traits\MessengerTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 class WebhookController extends Controller
 {
-    use MessageTrait;
+    use MessengerTrait;
 
     public function getWebhook(Request $request)
     {
