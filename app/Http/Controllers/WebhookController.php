@@ -96,7 +96,7 @@ class WebhookController extends Controller
                 'buttons' => [
                     [
                         'type' => 'postback',
-                        'title' => 'View Detail',
+                        'title' => 'လက်မှတ် စစ်နည်း',
                         'payload' => 'VIEW_CHECK_TICKET_GUIDE_DETAIL'
                     ]
                 ]
@@ -108,7 +108,7 @@ class WebhookController extends Controller
                 'buttons' => [
                     [
                         'type' => 'postback',
-                        'title' => 'View Detail',
+                        'title' => 'ဆက်သွယ်ရန်',
                         'payload' => 'VIEW_CONTACT_US_GUIDE_DETAIL'
                     ]
                 ]
