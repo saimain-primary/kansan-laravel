@@ -120,5 +120,40 @@ trait MessengerTrait
         return $responseData;
     }
 
+    protected function sendButtonTemplate($senderPSID, $text, $buttons)
+    {
+        try {
+            $response = Http::post($this->apiURL, [
+                'recipient' => [
+                    'id' => $senderPSID,
+                ],
+                "message" => [
+                    'attachment' => [
+                        'type' => 'template',
+                        'payload' => [
+                            'template_type' => 'button',
+                            'text' => $text,
+                            'buttons' => $buttons
+                        ]
+                    ]
+                ]
+            ]);
+
+            // Decode the JSON response
+            $responseData = [
+                'response' => $response->json(),
+                'status' => 200
+            ];
+
+        } catch (Exception $e) {
+            $responseData = [
+                'response' =>  $e->getMessage(),
+                'status' => 500,
+            ];
+        }
+        Log::debug($responseData);
+        return $responseData;
+    }
+
 
 }
