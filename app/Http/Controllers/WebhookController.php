@@ -91,7 +91,7 @@ class WebhookController extends Controller
             ],
             [
                 'title' => 'ကံစမ်းမဲ လက်မှတ် စစ်ရန်',
-                'subtitle' => 'ဝယ်ယူထားသော ကံစမ်းမဲ လက်မှတ် များကို စစ်ဆေးရန်အတွက် အောက်ရှိ View Detail ကို နှိပ်ပါ။',
+                'subtitle' => 'ဝယ်ယူထားသော ကံစမ်းမဲ လက်မှတ် များကို စစ်ဆေးမည်',
                 'image_url' => Storage::disk('public')->url('images/check_ticket_guide.png'),
                 'buttons' => [
                     [
@@ -103,7 +103,7 @@ class WebhookController extends Controller
             ],
             [
                 'title' => 'ကံစမ်း နှင့် ဆက်သွယ်ရန်',
-                'subtitle' => 'ကံစမ်း Messenger Bot အဖွဲ့ နှင့် တိုက်ရိုက် ဆက်သွယ်ရန် အောက်ရှိ View Detail ကို နှိပ်ပါ။',
+                'subtitle' => 'ကံစမ်း Messenger Bot အဖွဲ့ နှင့် တိုက်ရိုက် ဆက်သွယ်ရန်မည်',
                 'image_url' => Storage::disk('public')->url('images/contact_us_guide.png'),
                 'buttons' => [
                     [
