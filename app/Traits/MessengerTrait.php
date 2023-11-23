@@ -23,9 +23,7 @@ trait MessengerTrait
         $this->apiVersion = config('app.fb_api_version');
         $this->pageId = config('app.fb_page_id');
         $this->apiURL = "https://graph.facebook.com/" . $this->apiVersion . "/" . $this->pageId . "/messages?access_token=" . $this->accessToken;
-
         $this->httpClient = new Client();
-        ;
     }
 
 
