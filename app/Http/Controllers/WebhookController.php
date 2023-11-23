@@ -31,6 +31,7 @@ class WebhookController extends Controller
 
     public function postWebhook(Request $request)
     {
+        Log::info('post webhook called');
         Log::debug($request->all());
     }
 }
