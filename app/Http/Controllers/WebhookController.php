@@ -125,6 +125,7 @@ class WebhookController extends Controller
     protected function sendContactUsContent($senderPSID)
     {
         $contact = Contact::first();
+        Log::debug($contact);
         $message = "🍀 မင်္ဂလာပါ \n\n" . $contact->description . '\n\n' . 'ဖုန်းနံပါတ် : ' . $contact->phone . '\n' . 'အီးမေးလ် : ' . $contact->email . '\n' . 'လိပ်စာ : ' . $contact->address;
         $this->sendText($senderPSID, $message);
     }
