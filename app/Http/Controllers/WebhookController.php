@@ -130,9 +130,11 @@ class WebhookController extends Controller
         $message = "🍀 မင်္ဂလာပါ" . PHP_EOL . PHP_EOL . $contact->description . PHP_EOL . PHP_EOL . 'ဖုန်းနံပါတ် : ' . $contact->phone . PHP_EOL . 'အီးမေးလ် : ' . $contact->email . PHP_EOL . 'လိပ်စာ : ' . $contact->address;
 
         $this->sendButtonTemplate($senderPSID, $message, [
-            'type' => 'postback',
-            'title' => 'တိုက်ရိုက် စကားပြောမည်',
-            'payload' => 'TALK_TO_ADMIN'
+            [
+                'type' => 'postback',
+                'title' => 'တိုက်ရိုက် စကားပြောမည်',
+                'payload' => 'TALK_TO_ADMIN'
+            ]
         ]);
     }
 
