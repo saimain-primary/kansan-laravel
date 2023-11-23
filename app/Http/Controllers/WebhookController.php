@@ -26,4 +26,9 @@ class WebhookController extends Controller
             }
         }
     }
+
+    public function postWebhook(Request $request)
+    {
+        Log::debug($request->all());
+    }
 }
