@@ -2,50 +2,62 @@
 
 namespace App\Traits;
 
-use Exception;
+use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Http;
+use GuzzleHttp\Exception\ClientException;
 
 trait MessengerTrait
 {
-    protected $accessToken;
-    protected $apiURL;
-    protected $apiVersion;
-    protected $pageId;
-    protected $httpClient;
+    protected static $accessToken;
+    protected static $apiURL;
+    protected static $apiVersion;
+    protected static $pageId;
+    protected static $httpClient;
 
     // Boot method for the trait
-    protected function bootMessengerTrait()
+    protected static function bootMessengerTrait()
     {
         // Retrieve the value from .env, or use a default value
-        $this->accessToken = config('app.fb_access_token');
-        $this->apiVersion = config('app.fb_api_version');
-        $this->pageId = config('app.fb_page_id');
-        $this->apiURL = "https://graph.facebook.com/" . $this->apiVersion . "/" . $this->pageId . "/messages?access_token=" . $this->accessToken;
-        $this->httpClient = new Client();
+        static::$accessToken = config('app.fb_access_token');
+        static::$apiVersion = config('app.fb_api_version');
+        static::$pageId = config('app.fb_page_id');
+        static::$apiURL = "https://graph.facebook.com/" . static::$apiVersion . "/" . static::$pageId . "/messages?access_token=" . static::$accessToken;
+        static::$httpClient = new Client();
     }
 
 
     protected function sendTypingAction($senderPSID)
     {
         try {
-            $response = Http::post($this->apiURL, [
-                'recipient' => [
-                    'id' => $senderPSID,
-                ],
-                "sender_action" => "typing_on"
+            $response = Http::post('http://example.com/users', [
+                'name' => 'Steve',
+                'role' => 'Network Administrator',
+            ]);
+
+            $response = self::$httpClient->request("POST", self::$apiURL, [
+                'json' => [
+                    'recipient' => [
+                        'id' => $senderPSID,
+                    ],
+                    "sender_action" => "typing_on"
+                ]
             ]);
 
             // Decode the JSON response
             $responseData = [
-                'response' => $response->json(),
-                'status' => 200
+                'response' => json_decode($response->getBody(), true),
+                'status' => $response->getStatusCode()
             ];
 
-        } catch (Exception $e) {
+        } catch (ClientException $e) {
+            // Extract the response from the exception
+            $response = $e->getResponse();
+            $responseBody = $response->getBody()->getContents();
+            // Decode the JSON response
             $responseData = [
-                'response' =>  $e->getMessage(),
-                'status' => 500
+                'response' =>  json_decode($responseBody, true),
+                'status' => $response->getStatusCode()
             ];
             // Handle the error accordingly
             // For example, you might log the error or return an error message
