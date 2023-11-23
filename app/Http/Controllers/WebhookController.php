@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Traits\MessengerTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class WebhookController extends Controller
 {
@@ -59,6 +60,10 @@ class WebhookController extends Controller
         Log::debug($event);
         $senderPSID = $event['sender']['id'];
         if (isset($event['postback'])) {
+            $payloadData = $event['postback']['payload'];
+            if($payloadData === 'GET_STARTED') {
+                $this->sendWelcomeGeneric($senderPSID);
+            }
             Log::info('postback is called');
         } else {
             $message = $event['message']['text'];
@@ -67,5 +72,63 @@ class WebhookController extends Controller
             $this->sendSenderAction($senderPSID, 'typing_off');
         }
         return response('Successfully handled', 200);
+    }
+
+    protected function sendWelcomeGeneric($senderPSID)
+    {
+        $content = [
+            [
+                'title' => 'ကံစမ်းမဲ ဝယ်ရန်',
+                'subtitle' => 'ကံစမ်းမဲ ဝယ်နည်းများကို အသေးစိတ်ကြည့်ရန်အတွက် အောက်ရှိ View Detail ကို နှိပ်ပါ။',
+                'image_url' => Storage::disk('public')->url('images/buying_ticket_guide.png'),
+                "default_action" => [
+                    "type" => "postback",
+                    'payload' => 'VIEW_BUY_TICKET_GUIDE_DETAIL'
+                ],
+                'buttons' => [
+                        [
+                            'type' => 'postback',
+                            'title' => 'View Detail',
+                            'payload' => 'VIEW_BUY_TICKET_GUIDE_DETAIL'
+                        ]
+                    ]
+            ],
+            [
+                'title' => 'ကံစမ်းမဲ လက်မှတ် စစ်ရန်',
+                'subtitle' => 'ဝယ်ယူထားသော ကံစမ်းမဲ လက်မှတ် များကို စစ်ဆေးရန်အတွက် အောက်ရှိ View Detail ကို နှိပ်ပါ။',
+                'image_url' => Storage::disk('public')->url('images/check_ticket_guide.png'),
+                "default_action" => [
+                    "type" => "postback",
+                    'payload' => 'VIEW_CHECK_TICKET_GUIDE_DETAIL'
+                ],
+                'buttons' => [
+                    [
+                        'type' => 'postback',
+                        'title' => 'View Detail',
+                        'payload' => 'VIEW_CHECK_TICKET_GUIDE_DETAIL'
+                    ]
+                ]
+            ],
+            [
+                'title' => 'ကံစမ်း နှင့် ဆက်သွယ်ရန်',
+                'subtitle' => 'ကံစမ်း Messenger Bot အဖွဲ့ နှင့် တိုက်ရိုက် ဆက်သွယ်ရန် အောက်ရှိ View Detail ကို နှိပ်ပါ။',
+                'image_url' => Storage::disk('public')->url('images/contact_us_guide.png'),
+                "default_action" => [
+                    "type" => "postback",
+                    'payload' => 'VIEW_CONTACT_US_GUIDE_DETAIL'
+                ],
+                'buttons' => [
+                    [
+                        'type' => 'postback',
+                        'title' => 'View Detail',
+                        'payload' => 'VIEW_CONTACT_US_GUIDE_DETAIL'
+                    ]
+                ]
+            ]
+        ];
+
+        Log::debug($content);
+
+        $this->sendGeneric($senderPSID, $content);
     }
 }

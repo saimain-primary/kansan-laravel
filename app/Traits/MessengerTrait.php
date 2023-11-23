@@ -85,4 +85,39 @@ trait MessengerTrait
         return $responseData;
     }
 
+    protected function sendGeneric($senderPSID, $content)
+    {
+        try {
+            $response = Http::post($this->apiURL, [
+                'recipient' => [
+                    'id' => $senderPSID,
+                ],
+                "message" => [
+                    'attachment' => [
+                        'type' => 'template',
+                        'payload' => [
+                            'template_type' => 'generic',
+                            'elements' => $content
+                        ]
+                    ]
+                ]
+            ]);
+
+            // Decode the JSON response
+            $responseData = [
+                'response' => $response->json(),
+                'status' => 200
+            ];
+
+        } catch (Exception $e) {
+            $responseData = [
+                'response' =>  $e->getMessage(),
+                'status' => 500,
+            ];
+        }
+        Log::debug($responseData);
+        return $responseData;
+    }
+
+
 }
