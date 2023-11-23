@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contact;
 use App\Traits\MessengerTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -63,6 +64,8 @@ class WebhookController extends Controller
             $payloadData = $event['postback']['payload'];
             if($payloadData === 'GET_STARTED') {
                 $this->sendWelcomeGeneric($senderPSID);
+            } elseif($payloadData === 'VIEW_CONTACT_US_GUIDE_DETAIL') {
+                $this->sendContactUsContent($senderPSID);
             }
             Log::info('postback is called');
         } else {
@@ -115,8 +118,14 @@ class WebhookController extends Controller
             ]
         ];
 
-        Log::debug($content);
 
         $this->sendGeneric($senderPSID, $content);
+    }
+
+    protected function sendContactUsContent($senderPSID)
+    {
+        $contact = Contact::find();
+        $message = "🍀 မင်္ဂလာပါ \n\n" . $contact->description . '\n\n' . 'ဖုန်းနံပါတ် : ' . $contact->phone . '\n' . 'အီးမေးလ် : ' . $contact->email . '\n' . 'လိပ်စာ : ' . $contact->address;
+        $this->sendText($senderPSID, $message);
     }
 }
