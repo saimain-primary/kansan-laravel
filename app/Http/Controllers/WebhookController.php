@@ -9,11 +9,12 @@ class WebhookController extends Controller
 {
     public function getWebhook(Request $request)
     {
+        Log::debug($request->all());
+
         $verifyToken = config('app.fb_verify_token');
 
-        $hub = $request->query('hub');
-        $mode = $hub['mode'];
-        $vToken = $hub['verify_token'];
+        $mode = $request->query('hub.mode');
+        $vToken = $request->query('hub.verify_token');
 
         if ($mode && $vToken) {
             if ($mode === "subscribe" && $vToken === $verifyToken) {
