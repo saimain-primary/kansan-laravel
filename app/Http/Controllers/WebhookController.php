@@ -142,9 +142,11 @@ class WebhookController extends Controller
     protected function talkToAdmin($senderPSID)
     {
         $this->associatingTheTalkToAdminLabel($senderPSID);
-        $userInfo = $this->getUserInformationWithPSID($senderPSID);
+        $userInfoReturn = $this->getUserInformationWithPSID($senderPSID);
+        $userInfo = $userInfoReturn['response'];
+
         Log::debug($userInfo);
-        $this->sendText($senderPSID, 'ကံစမ်းအဖွဲ့အား အကြောင်းကြားပြီးပါပြီ။ မကြာခင် Admin မှ စာပြန်ပေးပါမည်။ မင်္ဂလာရှိသော နေ့လေးဖြစ်ပါစေ 🍀');
+        $this->sendText($senderPSID, '🍀 မင်္ဂလာရှိသော နေ့လေးဖြစ်ပါစေ' . $userInfo['first_name'] . PHP_EOL . PHP_EOL . 'ကံစမ်းအဖွဲ့ အား သင်နှင့် တိုက်ရိုက်ဆက်သွယ်ပေးရန် အကြောင်းကြားပြီးပါပြီ' . PHP_EOL . 'မကြာခင် Admin မှ စာပြန်ပေးပါမည်');
     }
 
 
