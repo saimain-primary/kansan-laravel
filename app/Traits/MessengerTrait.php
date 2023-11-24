@@ -161,9 +161,7 @@ trait MessengerTrait
         try {
             $url = "https://graph.facebook.com/" . $this->apiVersion . "/6949412621805261/label?access_token=" . $this->accessToken;
             $response = Http::post($url, [
-                'user' => [
-                    'id' => $senderPSID,
-                ],
+                'user' => $senderPSID
             ]);
 
             // Decode the JSON response
