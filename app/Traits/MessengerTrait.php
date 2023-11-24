@@ -155,5 +155,32 @@ trait MessengerTrait
         return $responseData;
     }
 
+    protected function associatingTheTalkToAdminLabel($senderPSID)
+    {
+
+        try {
+            $url = "https://graph.facebook.com/" . $this->apiVersion . "/6949412621805261/label?access_token=" . $this->accessToken;
+            $response = Http::post($url, [
+                'user' => [
+                    'id' => $senderPSID,
+                ],
+            ]);
+
+            // Decode the JSON response
+            $responseData = [
+                'response' => $response->json(),
+                'status' => 200
+            ];
+
+        } catch (Exception $e) {
+            $responseData = [
+                'response' =>  $e->getMessage(),
+                'status' => 500,
+            ];
+        }
+        Log::debug($responseData);
+        return $responseData;
+    }
+
 
 }

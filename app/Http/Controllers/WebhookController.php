@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contact;
+use App\Models\TalkToAdmin;
 use App\Traits\MessengerTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -140,7 +141,8 @@ class WebhookController extends Controller
 
     protected function talkToAdmin($senderPSID)
     {
-        $this->sendText($senderPSID, 'Admin မကြာခင် စာပြန်ပါမယ်');
+        $this->associatingTheTalkToAdminLabel($senderPSID);
+        $this->sendText($senderPSID, 'ကံစမ်းအဖွဲ့အား အကြောင်းကြားပြီးပါပြီ။ မကြာခင် Admin မှ စာပြန်ပေးပါမည်။ မင်္ဂလာရှိသော နေ့လေးဖြစ်ပါစေ 🍀');
     }
 
 
