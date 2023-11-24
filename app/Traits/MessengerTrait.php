@@ -180,5 +180,27 @@ trait MessengerTrait
         return $responseData;
     }
 
+    protected function getUserInformationWithPSID($senderPSID)
+    {
+        try {
+            $url = "https://graph.facebook.com/" . $senderPSID . "?fields=first_name,last_name,profile_pic&access_token=" . $this->accessToken;
+            $response = Http::get($url);
+
+            // Decode the JSON response
+            $responseData = [
+                'response' => $response->json(),
+                'status' => 200
+            ];
+
+        } catch (Exception $e) {
+            $responseData = [
+                'response' =>  $e->getMessage(),
+                'status' => 500,
+            ];
+        }
+        Log::debug($responseData);
+        return $responseData;
+    }
+
 
 }

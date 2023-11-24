@@ -142,6 +142,8 @@ class WebhookController extends Controller
     protected function talkToAdmin($senderPSID)
     {
         $this->associatingTheTalkToAdminLabel($senderPSID);
+        $userInfo = $this->getUserInformationWithPSID($senderPSID);
+        Log::debug($userInfo);
         $this->sendText($senderPSID, 'ကံစမ်းအဖွဲ့အား အကြောင်းကြားပြီးပါပြီ။ မကြာခင် Admin မှ စာပြန်ပေးပါမည်။ မင်္ဂလာရှိသော နေ့လေးဖြစ်ပါစေ 🍀');
     }
 
