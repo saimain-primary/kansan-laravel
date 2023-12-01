@@ -13,6 +13,8 @@
     <nav class="flex items-center justify-between px-6 py-4">
         <img class="w-10 shadow-lg" src="{{ asset('logo.png') }}" alt="logo">
     </nav>
+    <div id="supported" class="text-white">
+    </div>
     <div class="container mx-auto">
         <div class="grid min-h-[140px] w-full place-items-center overflow-x-scroll rounded-lg p-6 lg:overflow-visible">
             <div class="mb-8">
@@ -51,6 +53,14 @@
             // webview closed
         }, function error(err) {
             // an error occurred
+        });
+
+        MessengerExtensions.getSupportedFeatures(function success(result) {
+            let features = result.supported_features;
+            var div = document.getElementById('supported');
+            div.innerHTML += features;
+        }, function error(err) {
+            // error retrieving supported features
         });
     </script>
 
