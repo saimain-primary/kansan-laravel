@@ -60,6 +60,7 @@
             let features = result.supported_features;
             var div = document.getElementById('supported');
             div.innerHTML += features;
+            console.log('features', features);
         }, function error(err) {
             // error retrieving supported features
         });
