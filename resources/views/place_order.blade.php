@@ -21,8 +21,9 @@
                 src="https://scontent-sin6-4.xx.fbcdn.net/v/t39.30808-6/403599051_1414505246116587_8149516749010567783_n.jpg?stp=cp6_dst-jpg&_nc_cat=103&ccb=1-7&_nc_sid=dd5e9f&_nc_ohc=K1-W5_pjnQ0AX-aYXG1&_nc_ht=scontent-sin6-4.xx&oh=00_AfAgoDiSluPpEHRsaTaIgBu4RWI8iOVLGVcY7Wa7m9_RGA&oe=656E7220"
                 alt="nature image" />
 
-            <a
-                href="https://www.messenger.com/closeWindow/?image_url=https://yataicheng.info/storage/abc.jpeg&display_text=Closed"></a>
+            <a class="text-lg text-white"
+                href="https://www.messenger.com/closeWindow/?image_url=https://yataicheng.info/storage/abc.jpeg&display_text=Closed">Close
+                This</a>
         </div>
 
     </div>
