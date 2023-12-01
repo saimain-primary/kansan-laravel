@@ -24,11 +24,15 @@ class AdminPanelProvider extends PanelProvider
     {
         return $panel
             ->default()
-            ->id('admin')
-            ->path('admin')
+            ->brandName('Kan Sann')
+            ->brandLogo(asset('logo.png'))
+            ->favicon(asset('logo.png'))
+            ->id('dashboard')
+            ->path('dashboard')
+            ->darkMode(true, true)
             ->login()
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => '#FDD202'
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')

@@ -89,11 +89,17 @@ class WebhookController extends Controller
                 'subtitle' => 'ကံစမ်းမဲ ဝယ်နည်းများကို အသေးစိတ်ကြည့်မည်',
                 'image_url' => Storage::disk('public')->url('images/buying_ticket_guide.png'),
                 'buttons' => [
-                        [
-                            'type' => 'postback',
-                            'title' => 'ကံစမ်းမဲ ဝယ်နည်း',
-                            'payload' => 'VIEW_BUY_TICKET_GUIDE_DETAIL'
-                        ]
+                    [
+                        'type' => 'web_url',
+                        'title' => 'ကံစမ်းမဲ ဝယ်နည်း',
+                        "url" => "https://kansan.yataicheng.info/tickets/1/orders",
+                        "webview_height_ratio" => "tall"
+                    ]
+                        // [
+                        //     'type' => 'postback',
+                        //     'title' => 'ကံစမ်းမဲ ဝယ်နည်း',
+                        //     'payload' => 'VIEW_BUY_TICKET_GUIDE_DETAIL'
+                        // ]
                     ]
             ],
             [
@@ -143,7 +149,7 @@ class WebhookController extends Controller
     protected function talkToAdmin($senderPSID)
     {
         $this->associatingTheTalkToAdminLabel($senderPSID);
-        $this->sendText($senderPSID, 'မင်္ဂလာရှိသော နေ့လေးဖြစ်ပါစေ 🍀' . PHP_EOL . PHP_EOL . 'ကံစမ်း အဖွဲ့ အား သင်နှင့် တိုက်ရိုက်ဆက်သွယ်ပေးရန် အကြောင်းကြားပြီးပါပြီ။');
+        $this->sendText($senderPSID, 'မင်္ဂလာရှိသော နေ့လေးဖြစ်ပါစေ 🍀' . PHP_EOL . PHP_EOL . 'ကံစမ်း အဖွဲ့ အား သင်နှင့် တိုက်ရိုက်ဆက်သွယ် ပေးရန်အတွက် အကြောင်းကြားပြီးပါပြီ။');
     }
 
 
