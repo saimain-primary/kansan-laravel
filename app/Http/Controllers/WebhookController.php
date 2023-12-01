@@ -92,9 +92,9 @@ class WebhookController extends Controller
                     [
                         'type' => 'web_url',
                         'title' => 'ကံစမ်းမဲ ဝယ်နည်း',
-                        "messenger_extensions" => true,
                         "url" => "https://kansan.yataicheng.info/tickets/1/orders",
-                        "webview_height_ratio" => "tall"
+                        "webview_height_ratio" => "compact",
+                        "messenger_extensions" => true,
                     ]
                         // [
                         //     'type' => 'postback',
