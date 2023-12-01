@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @vite('resources/css/app.css')
+    <title>My Awesome Webview</title>
     <script async src="https://unpkg.com/@material-tailwind/html@latest/scripts/ripple.js"></script>
 </head>
 
@@ -45,6 +46,12 @@
             alert('done loading');
             // the Messenger Extensions JS SDK is done loading 
         };
+
+        MessengerExtensions.requestCloseBrowser(function success() {
+            // webview closed
+        }, function error(err) {
+            // an error occurred
+        });
     </script>
 
 </body>
