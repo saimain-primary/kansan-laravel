@@ -14,6 +14,7 @@
         <img class="w-10 shadow-lg" src="{{ asset('logo.png') }}" alt="logo">
     </nav>
     <div id="supported" class="text-white">
+        this is text
     </div>
     <div class="container mx-auto">
         <div class="grid min-h-[140px] w-full place-items-center overflow-x-scroll rounded-lg p-6 lg:overflow-visible">
